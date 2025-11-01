@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Estadísticas de Contactos</title>
+		<link rel="stylesheet" href="../estilos/style.css" />
+	</head>
+	<body>
+		<header class="site-header">
+			<nav class="main-nav">
+				<ul>
+					<li>
+						<a href="../index.html"
+							><svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="currentColor"
+								class="icon icon-tabler icons-tabler-filled icon-tabler-home"
+							>
+								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+								<path
+									d="M12.707 2.293l9 9c.63 .63 .184 1.707 -.707 1.707h-1v6a3 3 0 0 1 -3 3h-1v-7a3 3 0 0 0 -2.824 -2.995l-.176 -.005h-2a3 3 0 0 0 -3 3v7h-1a3 3 0 0 1 -3 -3v-6h-1c-.89 0 -1.337 -1.077 -.707 -1.707l9 -9a1 1 0 0 1 1.414 0m.293 11.707a1 1 0 0 1 1 1v7h-4v-7a1 1 0 0 1 .883 -.993l.117 -.007z"
+								/></svg
+						></a>
+					</li>
+					<li><a href="crearcontacto.html">Crear contacto</a></li>
+					<li><a class="active" href="#">Estadísticas</a></li>
+					<li><a href="#">Ayuda</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main class="container">
+			<h1>Estadísticas de Contactos</h1>
+
+			<!-- Resumen general -->
+			<div class="stats-grid">
+				<div class="stat-card">
+					<div class="stat-icon">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="32"
+							height="32"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+							<circle cx="9" cy="7" r="4"></circle>
+							<path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+							<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+						</svg>
+					</div>
+					<div class="stat-content">
+						<h3 id="total_contactos">0</h3>
+						<p>Total Contactos</p>
+					</div>
+				</div>
+
+				<div class="stat-card">
+					<div class="stat-icon">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="32"
+							height="32"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+							<circle cx="12" cy="10" r="3"></circle>
+						</svg>
+					</div>
+					<div class="stat-content">
+						<h3 id="total_barrios">0</h3>
+						<p>Barrios Diferentes</p>
+					</div>
+				</div>
+
+				<div class="stat-card">
+					<div class="stat-icon">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="32"
+							height="32"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+							<circle cx="8.5" cy="7" r="4"></circle>
+							<line x1="23" y1="11" x2="17" y2="11"></line>
+						</svg>
+					</div>
+					<div class="stat-content">
+						<h3 id="promedio_por_barrio">0</h3>
+						<p>Promedio por Barrio</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Distribución por barrio -->
+			<div class="stats-section">
+				<h2>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						style="vertical-align: middle; margin-right: 0.5rem"
+					>
+						<line x1="18" y1="20" x2="18" y2="10"></line>
+						<line x1="12" y1="20" x2="12" y2="4"></line>
+						<line x1="6" y1="20" x2="6" y2="14"></line>
+					</svg>
+					Distribución de Contactos por Barrio
+				</h2>
+
+				<div id="barrios_container" class="progress-list">
+					<!-- Aquí se cargarán dinámicamente las barras de progreso -->
+				</div>
+			</div>
+
+		</main>
+	</body>
+	<script src="estadisticas.js"></script>
+</html>
