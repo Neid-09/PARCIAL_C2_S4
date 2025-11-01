@@ -30,7 +30,7 @@ const colores = [
 ];
 
 // === CARGAR DISTRIBUCIÓN POR BARRIO DESDE API ===
-fetch("/personas_por_barrio")
+fetch("/contactos/contactos_por_barrio")
 	.then((res) => res.json())
 	.then((data) => {
 		// Calcular total de contactos

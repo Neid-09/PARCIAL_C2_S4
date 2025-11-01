@@ -1,18 +1,10 @@
-import mysql from "mysql2";
+import mysql from "mysql2/promise";
 
-let conexion = mysql.createConnection({
+let conexion = await mysql.createConnection({
 	host: "localhost",
 	database: "contactos",
 	user: "root",
 	password: "root",
-});
-
-conexion.connect(function (err) {
-	if (err) {
-		throw err;
-	} else {
-		console.log("conexion exitosa");
-	}
 });
 
 export { conexion };

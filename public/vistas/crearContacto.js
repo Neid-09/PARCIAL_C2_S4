@@ -36,7 +36,7 @@ function mostrarAlerta(mensaje, tipo = "success") {
 }
 
 // Fetch generos
-fetch("/generos")
+fetch("/contactos/generos")
 	.then((res) => res.json())
 	.then((data) => {
 		data.forEach((item) => {
@@ -48,7 +48,7 @@ fetch("/generos")
 	});
 
 // Fetch tipos de telefono
-fetch("/tipos_telefono")
+fetch("/contactos/tipos_telefono")
 	.then((res) => res.json())
 	.then((data) => {
 		data.forEach((item) => {
@@ -60,7 +60,7 @@ fetch("/tipos_telefono")
 	});
 
 // Fetch direcciones
-fetch("/direcciones")
+fetch("/contactos/direcciones")
 	.then((res) => res.json())
 	.then((data) => {
 		data.forEach((item) => {
