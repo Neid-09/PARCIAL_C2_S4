@@ -13,9 +13,7 @@
 	</head>
 
 	<body>
-		<header class="site-header">
-			<%- include('partials/navbar') %>
-		</header>
+		<header class="site-header"><%- include('partials/navbar') %></header>
 
 		<main class="container">
 			<h1>Contactos</h1>
@@ -24,21 +22,55 @@
 				<table id="tabla_resultados" class="contacts-table">
 					<thead>
 						<tr>
-							<th>IDENTIFICACIÓN</th>
+							<th>ID</th>
 							<th>NOMBRE COMPLETO</th>
 							<th>GÉNERO</th>
 							<th>DIRECCIÓN</th>
 							<th>TIPO TEL</th>
-							<th>EMAIL</th>
 							<th>TELÉFONO</th>
+							<th>EMAIL</th>
 							<th>IMAGEN</th>
-							<th>ACCIONES</th>
+
 						</tr>
 					</thead>
-					<tbody></tbody>
+					<tbody>
+						<% if(contactos && contactos.length > 0) {
+							contactos.forEach(contacto => {
+								const id = contacto.id_contacto || "";
+								const nombreCompleto = [
+									contacto.primer_nombre,
+									contacto.segundo_nombre,
+									contacto.primer_apellido,
+									contacto.segundo_apellido,
+								].filter(Boolean).join(' ');
+								const genero = contacto.genero || "";
+								const direccion = contacto.direccion || "";
+								const email = contacto.email || "";
+								const telefono = contacto.telefono || "";
+								const tipoTel = contacto.tipo_telefono || "";
+								const imagen = contacto.imagen || "";
+						%>
+						<tr>
+							<td><%= id %></td>
+							<td><%= nombreCompleto %></td>
+							<td><%= genero %></td>
+							<td><%= direccion %></td>
+							<td><%= tipoTel %></td>
+							<td><%= telefono %></td>
+							<td><%= email %></td>
+							<td>
+								<% if(imagen) { %>
+									<img src="<%= imagen %>" alt="foto-<%= id %>" class="thumb">
+								<% } else { %>
+									Sin imagen
+								<% } %>
+							</td>
+							
+						</tr>
+						<% }); } %>
+					</tbody>
 				</table>
 			</div>
 		</main>
 	</body>
-	<script src="/js/home.js"></script>
 </html>

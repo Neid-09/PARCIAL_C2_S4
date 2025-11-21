@@ -18,7 +18,7 @@
 
 */
 
-fetch("/contactos")
+/* fetch("/contactos")
 	.then((res) => res.json())
 	.then((data) => {
 		const tbody = document.querySelector("#tabla_resultados tbody");
@@ -50,10 +50,11 @@ fetch("/contactos")
           <td>${email}</td>
           <td>${telefono}</td>
           <td>
-            ${imagen
-              ? `<img src="${imagen}" alt="foto-${id}" class="thumb">`
-              : "Sin imagen"
-            }
+            ${
+													imagen
+														? `<img src="${imagen}" alt="foto-${id}" class="thumb">`
+														: "Sin imagen"
+												}
           </td>
           <td class="actions">
               <button class="btn btn-edit" data-id="${id}">Editar</button>
@@ -63,4 +64,5 @@ fetch("/contactos")
 			tbody.appendChild(tr);
 		});
 	})
-	.catch((err) => console.error("Error al cargar la información:", err));
+	.catch((err) => console.error("Error al cargar la información:", err)); */
+

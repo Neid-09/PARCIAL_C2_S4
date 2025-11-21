@@ -1,5 +1,6 @@
 import express from "express";
-import contactosRouter from "./controller/contactos.routes.js";
+import contactosRouter from "./contacto/contactos.routes.js";
+import { getDatosContactosCompletos } from "./contacto/contactos.service.js";
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -8,8 +9,9 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use('/contactos', contactosRouter);
 
-app.get("/", (req, res) => {
-	res.render("index", { currentPath: "/" });
+app.get("/", async (req, res) => {
+	const contactos = await getDatosContactosCompletos();
+	res.render("index", { currentPath: "/", contactos });
 });
 
 app.get("/crearContacto", (req, res) => {

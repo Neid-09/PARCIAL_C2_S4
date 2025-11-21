@@ -96,9 +96,8 @@ formulario.addEventListener("submit", (e) => {
 			mostrarAlerta("¡Contacto creado exitosamente!", "success");
 
 			// Limpiar formulario después de 2 segundos
-			setTimeout(() => {
-				formulario.reset();
-			}, 2000);
+			formulario.reset();
+
 		})
 		.catch((error) => {
 			console.error("Error al crear contacto:", error);

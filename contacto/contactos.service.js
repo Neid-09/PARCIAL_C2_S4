@@ -1,16 +1,6 @@
 import { conexion } from "../db/conexionbd.js";
 
-async function manegarConsultas(consulta, res) {
-	try {
-		const [rows] = await conexion.query(consulta);
-		res.status(200).json(rows);
-	} catch (err) {
-		console.error("Error en la consulta:", err);
-		res.status(500).json({ error: "Error en la consulta" });
-	}
-}
-
-export const getDatosContactosCompletos = async (req, res) => {
+export const getDatosContactosCompletos = async () => {
 	const consulta = `
       SELECT 
         c.id_contacto,
@@ -33,66 +23,41 @@ export const getDatosContactosCompletos = async (req, res) => {
           ON c.id_direccion=d.id_direccion
       ORDER BY c.id_contacto ASC
   `;
-	manegarConsultas(consulta, res);
+	return manegarConsultas(consulta);
 };
 
-export const getGeneros = async (req, res) => {
+export const getGeneros = async () => {
 	const consulta = `
     SELECT * FROM genero
   `;
-	manegarConsultas(consulta, res);
+	return manegarConsultas(consulta);
 };
 
-export const getTiposTelefono = async (req, res) => {
+export const getTiposTelefono = async () => {
 	const consulta = `
     SELECT * FROM tipo_telefono
   `;
-	manegarConsultas(consulta, res);
+	return manegarConsultas(consulta);
 };
 
-export const getDirecciones = async (req, res) => {
+export const getDirecciones = async () => {
 	const consulta = `
     SELECT * FROM direccion
   `;
-	manegarConsultas(consulta, res);
+	return manegarConsultas(consulta);
 };
 
-export const getContactosPorBarrio = async (req, res) => {
+export const getContactosPorBarrio = async () => {
 	const consulta = `
     SELECT d.detalle_direccion AS barrio, COUNT(c.id_contacto) AS cantidad
     FROM contacto c
     INNER JOIN direccion d ON c.id_direccion = d.id_direccion
     GROUP BY d.detalle_direccion
   `;
-	manegarConsultas(consulta, res);
+	return manegarConsultas(consulta);
 };
 
-export const crearContacto = async (req, res) => {
-	const {
-		primer_nombre,
-		segundo_nombre,
-		primer_apellido,
-		segundo_apellido,
-		id_genero,
-		id_direccion,
-		id_tipo_telefono,
-		email,
-		telefono,
-		imagen,
-	} = req.body;
-
-	if (
-		!primer_nombre ||
-		!primer_apellido ||
-		!email ||
-		!id_genero ||
-		!telefono ||
-		!id_tipo_telefono ||
-		!id_direccion
-	) {
-		return res.status(400).json({ error: "Faltan campos obligatorios" });
-	}
-
+export const crearContacto = async (contacto) => {
 	const consulta = `
 
     INSERT INTO contacto (
@@ -109,18 +74,28 @@ export const crearContacto = async (req, res) => {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 	const values = [
-		primer_nombre,
-		segundo_nombre,
-		primer_apellido,
-		segundo_apellido,
-		id_genero,
-		id_direccion,
-		id_tipo_telefono,
-		email,
-		telefono,
-		imagen,
+		contacto.primer_nombre,
+		contacto.segundo_nombre,
+		contacto.primer_apellido,
+		contacto.segundo_apellido,
+		contacto.id_genero,
+		contacto.id_direccion,
+		contacto.id_tipo_telefono,
+		contacto.email,
+		contacto.telefono,
+		contacto.imagen,
 	];
 
 	const [resultado] = await conexion.query(consulta, values);
-	res.status(201).json({ id: resultado.insertId });
+  return { id_insertado: resultado.insertId };
+};
+
+const manegarConsultas = async (consulta) => {
+	try {
+		const [rows] = await conexion.query(consulta);
+		return rows;
+	} catch (err) {
+		console.error("Error en la consulta:", err);
+		throw new Error("Error en la consulta");
+	}
 };
