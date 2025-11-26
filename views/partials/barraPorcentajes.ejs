@@ -1,0 +1,14 @@
+<div class="progress-item">
+	<div class="progress-header">
+		<span class="progress-label"><%= nombre %></span>
+		<span class="progress-value"><%= cantidad %> (<%= porcentaje.toFixed(1) %>%)</span>
+	</div>
+	<div class="progress-bar-container">
+		<div
+			class="progress-bar"
+			style="width: <%= porcentaje %>%; background: <%= color %>;"
+		>
+			<span class="progress-percentage"><%= porcentaje.toFixed(1) %>%</span>
+		</div>
+	</div>
+</div>

@@ -7,9 +7,7 @@
 		<link rel="stylesheet" href="/estilos/style.css" />
 	</head>
 	<body>
-		<header class="site-header">
-			<%- include('partials/navbar') %>
-		</header>
+		<header class="site-header"><%- include('partials/navbar') %></header>
 
 		<main class="container">
 			<h1>Crear Nuevo Contacto</h1>
@@ -48,6 +46,9 @@
 							<label for="id_genero">Género *</label>
 							<select id="id_genero" name="id_genero" required>
 								<option value="">Seleccione...</option>
+								<% generos.forEach(genero => { %>
+									<option value="<%= genero.id_genero %>"><%= genero.detalle_genero %></option>
+								<% }); %>
 							</select>
 						</div>
 						<div class="form-group">
@@ -61,6 +62,9 @@
 							<label for="id_tipo_telefono">Tipo de Teléfono *</label>
 							<select id="id_tipo_telefono" name="id_tipo_telefono" required>
 								<option value="">Seleccione...</option>
+								<% tiposTelefono.forEach(tipoTelefono => { %>
+									<option value="<%= tipoTelefono.id_tipo_telefono %>"><%= tipoTelefono.detalle_tipo_telefono %></option>
+								<% }); %>
 							</select>
 						</div>
 						<div class="form-group">
@@ -74,6 +78,9 @@
 							<label for="id_direccion">Dirección *</label>
 							<select id="id_direccion" name="id_direccion" required>
 								<option value="">Seleccione...</option>
+								<% direcciones.forEach(direccion => { %>
+									<option value="<%= direccion.id_direccion %>"><%= direccion.detalle_direccion %></option>
+								<% }); %>
 							</select>
 						</div>
 						<div class="form-group">
@@ -97,4 +104,5 @@
 		</main>
 	</body>
 	<script src="/js/crearContacto.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>

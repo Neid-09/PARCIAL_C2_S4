@@ -1,6 +1,6 @@
 import express from "express";
 import contactosRouter from "./contacto/contactos.routes.js";
-import { getDatosContactosCompletos } from "./contacto/contactos.service.js";
+import { getContactosPorBarrio, getDatosContactosCompletos, getDirecciones, getGeneros, getTiposTelefono } from "./contacto/contactos.service.js";
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -14,12 +14,17 @@ app.get("/", async (req, res) => {
 	res.render("index", { currentPath: "/", contactos });
 });
 
-app.get("/crearContacto", (req, res) => {
-	res.render("crearContacto", { currentPath: "/crearContacto" });
+app.get("/crearContacto", async (req, res) => {
+	const generos = await getGeneros();
+	const tiposTelefono = await getTiposTelefono();
+	const direcciones = await getDirecciones();
+	res.render("crearContacto", { currentPath: "/crearContacto", generos, tiposTelefono, direcciones });
 });
 
-app.get("/estadisticas", (req, res) => {
-	res.render("estadisticas", { currentPath: "/estadisticas" });
+app.get("/estadisticas", async (req, res) => {
+	const contactosPorBarrio = await getContactosPorBarrio();
+	console.log(contactosPorBarrio);
+	res.render("estadisticas", { currentPath: "/estadisticas" , contactosPorBarrio });
 });
 
 app.listen(8080, () => {

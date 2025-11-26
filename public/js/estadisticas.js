@@ -1,4 +1,4 @@
-// Función para crear una barra de progreso
+/* // Función para crear una barra de progreso
 function crearBarraProgreso(label, cantidad, porcentaje, color) {
 	return `
     <div class="progress-item">
@@ -63,3 +63,4 @@ fetch("/contactos/contactos_por_barrio")
 	.catch((error) => {
 		console.error("Error al cargar distribución por barrio:", error);
 	});
+ */

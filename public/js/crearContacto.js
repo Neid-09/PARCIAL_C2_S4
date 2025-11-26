@@ -1,4 +1,4 @@
-const genero = document.getElementById("id_genero");
+/* const genero = document.getElementById("id_genero");
 const tipoTelefono = document.getElementById("id_tipo_telefono");
 const direccion = document.getElementById("id_direccion");
 
@@ -69,9 +69,9 @@ fetch("/contactos/direcciones")
 			option.textContent = item.detalle_direccion;
 			direccion.appendChild(option);
 		});
-	});
+	}); */
 
-// == ENVIAR FORMULARIO ==
+/* // == ENVIAR FORMULARIO ==
 const formulario = document.getElementById("form_crear_contacto");
 formulario.addEventListener("submit", (e) => {
 	e.preventDefault();
@@ -105,5 +105,40 @@ formulario.addEventListener("submit", (e) => {
 				"Error al crear el contacto. Por favor, intenta nuevamente.",
 				"error"
 			);
+		});
+}); */
+const formulario = document.getElementById("form_crear_contacto");
+formulario.addEventListener("submit", (e) => {
+	e.preventDefault();
+	const formData = new FormData(formulario);
+	const datos = {};
+	formData.forEach((value, key) => {
+		datos[key] = value;
+	});
+
+	fetch("/contactos", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(datos),
+	})
+		.then((res) => res.json())
+		.then(async (data) => {
+			console.log("Contacto creado:", data);
+			await Swal.fire({
+				title: "¡Éxito!",
+				text: "Contacto creado exitosamente.",
+				icon: "success",
+			});
+			formulario.reset();
+		})
+		.catch((error) => {
+			console.error("Error al crear contacto:", error);
+			Swal.fire({
+				title: "Error",
+				text: "Hubo un problema al crear el contacto.",
+				icon: "error",
+			});
 		});
 });

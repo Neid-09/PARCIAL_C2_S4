@@ -14,6 +14,9 @@
 
 			<!-- Resumen general -->
 			<div class="stats-grid">
+				<% const totalContacto = contactosPorBarrio.reduce((sum, barrio) => sum + barrio.cantidad, 0); %> 
+				<% const totalBarrios = contactosPorBarrio.length;%> 
+				<% const promedioPorBarrio = totalContacto / totalBarrios; %>
 				<div class="stat-card">
 					<div class="stat-icon">
 						<svg
@@ -34,11 +37,10 @@
 						</svg>
 					</div>
 					<div class="stat-content">
-						<h3 id="total_contactos">0</h3>
+						<h3 id="total_contactos"><%= totalContacto %></h3>
 						<p>Total Contactos</p>
 					</div>
 				</div>
-
 				<div class="stat-card">
 					<div class="stat-icon">
 						<svg
@@ -57,7 +59,7 @@
 						</svg>
 					</div>
 					<div class="stat-content">
-						<h3 id="total_barrios">0</h3>
+						<h3 id="total_barrios"><%= totalBarrios %></h3>
 						<p>Barrios Diferentes</p>
 					</div>
 				</div>
@@ -81,7 +83,7 @@
 						</svg>
 					</div>
 					<div class="stat-content">
-						<h3 id="promedio_por_barrio">0</h3>
+						<h3 id="promedio_por_barrio"><%= promedioPorBarrio.toFixed(1) %></h3>
 						<p>Promedio por Barrio</p>
 					</div>
 				</div>
@@ -111,10 +113,29 @@
 
 				<div id="barrios_container" class="progress-list">
 					<!-- Aquí se cargarán dinámicamente las barras de progreso -->
+					<% barriosOrdenados = contactosPorBarrio.sort((a, b) => b.cantidad - a.cantidad); %>
+					<% const colores = [
+						"linear-gradient(135deg, #4a9eff 0%, #2c7fd9 100%)",
+						"linear-gradient(135deg, #10b981 0%, #059669 100%)",
+						"linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+						"linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)",
+						"linear-gradient(135deg, #ec4899 0%, #db2777 100%)",
+						"linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)",
+						"linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
+						"linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)",
+						"linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+						"linear-gradient(135deg, #a855f7 0%, #9333ea 100%)",
+					] %>
+					
+					<% barriosOrdenados.forEach((barrio, index) => { 
+						const porcentaje = (barrio.cantidad / totalContacto) * 100;
+						const color = colores[index % colores.length];
+					%>
+						<%- include('partials/barraPorcentajes', { nombre: barrio.barrio, cantidad: barrio.cantidad, porcentaje: porcentaje, color: color }) %>
+					<% }); %>
 				</div>
 			</div>
-
 		</main>
 	</body>
-	<script src="/js/estadisticas.js"></script>
+	<!-- <script src="/js/estadisticas.js"></script> -->
 </html>
